@@ -1,0 +1,71 @@
+A. Umum :
+1. Proses membuat file SCSS dan kemudian mengonversinya menjadi file CSS menggunakan terminal dengan perintah `sass` adalah langkah-langkah penting dalam workflow CSS modern. Berikut adalah panduan langkah demi langkah untuk melakukannya.
+-----------------------------------------------------------------
+
+B. Langkah-langkah instal Sass :
+1. Jika belum menginstal Sass, kamu perlu menginstalnya terlebih dahulu. Sass bisa diinstal menggunakan `npm` (Node Package Manager).
+1a. Install Sass dengan npm (direkomendasikan).
+1b. Setelah instalasi selesai, kamu bisa memeriksa apakah Sass sudah terpasang dengan mengetikkan perintah berikut di terminal : sass --version
+-----------------------------------------------------------------
+2. BUat File CSS :
+2a. Buat file SCSS (Sass dengan sintask SCSS) di text editor pilihanmu. File SCSS memiliki ekstensi `.scss`. Misalnya, kamu bisa membuat file bernama `sass-input.scss`.
+2b. Contoh isi file `sass-input.scss` :
+$primary-color : #003366;
+$secondary-color : #FFD700;
+$padding : 15px;
+
+body {
+  background-color : $primary-color;
+  color : lighten($primary-color, 30%);
+}
+
+.button {
+  background-color : $secondary-color;
+  padding : $padding;
+  border-radius : 5px;
+  &:hover {
+    background-color : darken($secondary-color, 10%);
+  }
+}
+-----------------------------------------------------------------
+3. Kompilasi SCSS ke CSS menggunakan terminal.
+3a. Setelah kamu membuat file SCSS, langkah berikutnya adalah mengonversi (mengompilasi) file SCSS tersebut menjadi file CSS, ini dilakukan menggunakan perintah `sass` di terminal.
+3b. Perintah untuk mengompilasi SCSS : sass sass-input.scss css-output.css
+-----------------------------------------------------------------
+//penjelasan :
+* `sass-input.scss` : Ini adalah file SCSS yang akan kamu kompilasi.
+* `css-input.css` : Ini adalah file CSS hasil kompilasi yang akan dihasilkan oleh Sass.
+-----------------------------------------------------------------
+setelah menjalankan perintah di atas, kamu akan melihat file baru bernama `css-output.css` yang berisi CSS yang dikompilasi dari file SCSS kamu.
+
+
+
+
+C. (Opsional) Watch Mode :
+1. Jika kamu ingin Sass secara otomatis mengompilasi file SCSS setiap kali kamu menyimpannya, kamu bisa menggunakan watch mode. Ini akan berguna saat kita sedang mengembangkan proyek dan sering melakukan perubahan pada file SCSS.
+1a. Perintah untuk menggunakan Watch Mode : sass --watch sass-input.scss:css-output.css
+1b. Dengan menggunakan perintah ini, setiap kali kamu menyimpan perubahan di file `sass-input.scss`, Sass akan otomatis memperbarui file SCSS.
+1c. Perintah untuk menggunakan Watch Mode :
+    `sass --watch sass-input.scss:css-output.css`
+-----------------------------------------------------------------
+//penjelasan : Dengan menggunakan perintah ini, setiap kali kamu menyimpan perubahan di file `sass-input.scss`, Sass akan otomatis memperbarui file `css-output.css`.
+
+
+
+D. Gunakan file CSS di proyekmu :
+1. Setelah file CSS dihasilkan, kamu bisa menghubungkannya ke HTML dengan menambahkan link ke file CSS dalam tag `<link>`.
+1a. Contoh : <link rel="stylesheet" href="css-output.css">
+-----------------------------------------------------------------
+
+
+
+E. Kesimpulan :
+1. Dengan mengikuti langkah-langkah ini, kamu telah berhasil membuat file SCSS, mengompilasinya menjadi CSS menggunakan terminal, dan bahkan bisa mengaktifkan watch mode untuk mempercepat pengembangan. 
+2. Ini adalah workflow umum ketika bekerja dengan CSS preprocessors seperti Sass.
+
+
+
+
+
+
+
