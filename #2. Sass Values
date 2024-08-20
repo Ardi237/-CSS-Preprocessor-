@@ -1,0 +1,144 @@
+A. Umum :
+1. Dalam Sass, "Values" mengacu pada nilai yang dapat digunakan dalam berbagai konteks seperti variabel, properti CSS, dan argument dalam mixin atau fungsi. 
+---------------------------------------------
+2. Nilai-nilai ini mencakup berbagai tipe data yang memungkinkan kamu untuk menulis stylesheet dengan lebih dinamis dan fleksibel.
+---------------------------------------------
+
+
+
+B. Numbers (Angka) :
+1. Sass mendukung angka dengan atau tanpa unit (misalnya `px`,`em`,`%`). Angka dapat digunakan dalam perhitungan artimaktika, fungsi, dan sebagainya.
+1a. Contoh :
+$base-padding: 10px;
+$double-padding: $base-padding * 2; // 20px
+---------------------------------------------
+
+
+
+C. Strings (String) :
+1. String : urutan karakter dan dapat berupa teks tanpa atau dengan tanda kutip. Sass mendukung string berformat tunggal (`'text'`) atau ganda (`'text'`).
+1a. Contoh : $font-family : "Helvetiva, Arial, sans-serif";
+---------------------------------------------
+
+
+
+D. Colors (Warna) : 
+1. warna dalam Sass bisa berupa warna hex ('#ff0000'), RGB ('fgb(255, 0 , 0)'), HSL (`hsl(0, 100%, 50%)`), atau nama warna ('red'). Sass juga menyediakan fungsi untuk memanipulasi warna seperti `lighten`,`darken`,`adjust-hue`, dan lainnya.
+1a. Contoh :
+$primary-color: #003366;
+$lighter-color: lighten($primary-color, 20%); // Lebih terang 20%
+---------------------------------------------
+
+
+
+E. Booleans (Boolean) :
+1. Nilai boolean hanya memiliki dua nilai: true atau false. Boolean sering digunakan dalam pengkondisian (@if, @else).
+1a. Contoh :
+$is-rounded: true;
+
+@if $is-rounded {
+  border-radius: 10px;
+} @else {
+  border-radius: 0;
+}
+---------------------------------------------
+
+
+
+F. Null (Kosong) :
+1. `null`  adalah nilai kosong di Sass, digunakan untuk variabel atau nilai yang belum diatur. Nilai `null` tidak akan dirender dalam CSS final.
+1a. Contoh : 
+$margin: null;
+
+.box {
+  margin: $margin; // Tidak akan menghasilkan output CSS
+}
+---------------------------------------------
+
+
+
+G. Lists (daftar) :
+1. Lists adalah sekumpulan nilai yang dipisahkan oleh spasi atau koma. Sass lists bisa digunakan untuk mengelompokkan beberapa nilai bersama-sama.
+1a. Contoh : 
+$font-stack: "Helvetica", "Arial", sans-serif;
+$padding-values: 10px 15px 20px 25px;
+
+.text {
+  font-family: $font-stack;
+  padding: $padding-values;
+}
+---------------------------------------------
+
+
+
+H. Maps (Peta) :
+1. Maps adalah kumpulan pasangan key-value, mirip dengan objek di JavaScript. ini sangat berguna untuk mengelompokkkan nilai yang terkait.
+1a. Contoh :
+$theme-colors: (
+  primary: #003366,
+  secondary: #FFD700,
+  accent: #FF5733
+);
+
+.button {
+  background-color: map-get($theme-colors, primary);
+}
+---------------------------------------------
+
+
+I. Functions and Operations (Fungsi dan Operasi) :
+1. Sass menyediakan berbagai fungsi bawaan dan memungkinkan kamu membuat fungsi sendiri. Fungsi ini bisa menerima berbagai tipe data seperti warna, angka, atau string dan mengembalikan nilai.
+1a. Contoh fungsi bawaan : $shade : darken(#003366, 10%); 
+                           // Menggelapkan warna sebesar 10%.
+---------------------------------------------
+
+
+
+J. Interpolation (Interpolasi) :
+1. Interpolasi ('#{}')memungkinkan kamu menyisipkan nilai variabel atau ekspresi ke dalam string, selector, atau nama properti.
+1a. Contoh :
+$suffix: "-large";
+
+.icon#{$suffix} {
+  width: 50px;
+  height: 50px;
+}
+---------------------------------------------
+
+
+
+K. Unit (Unit) : 
+1. Angka dalam Sass bisa memiliki unit seperti `px`, `em`, `%`, dll. Kamu juga bisa melakukan perhitungan dengan unit, dan Sass akan secara otomatis mengelola konversi unit.
+1a. Contoh :
+$width : 100px;
+$half-width : $width/2;
+---------------------------------------------
+
+
+
+L. Penggunaan Sass Values : 
+1. Sass values bisa digunakan dalam berbagai konteks untuk membuat stylesheet yang lebih fleksibel, terstruktur, dan mudah diatur. 
+1a. Mereka memungkinkan kamu untuk mengabstraksi nilai digunakan, membuat kode lebih modular, dan menghindari pengulangan.
+1b. Contoh Implementasi keseluruhan :
+$primary-color: #003366;
+$secondary-color: #FFD700;
+$padding: 15px;
+
+.container {
+  background-color: $primary-color;
+  padding: $padding;
+  color: lighten($primary-color, 30%);
+}
+
+.button {
+  background-color: $secondary-color;
+  padding: $padding;
+  border-radius: 5px;
+}
+---------------------------------------------
+// Dalam contoh di atas, `primary-color`, `secondary-color`, dan `padding` adalah nilai yang digunakan di berbagai tempat di stylesheet. Sass values membantu menjaga konsistensi dan memudahkan pemeliharaan kode.
+
+
+
+
+
