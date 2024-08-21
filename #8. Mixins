@@ -1,0 +1,141 @@
+A. Umum :
+1. Mixins dalam SCSS (Sass) adalah fitur yang memungkinkan kamu untuk mendefinisikan kumpulan deklarasi CSS yang dapat digunakan kembali di berbagai tempat dalam stylesheet kamu. 
+--------------------------------------------------------
+2. Mixins mempermudah penerapan gaya yang sering digunakan dan membantu menjaga kode CSS tetap kering (Don't Repeat Yourself - DRY).
+--------------------------------------------------------
+
+
+
+B. Cara mendefinisikan Mixins
+1. Untuk mendefinisikan mixin, gunakan direktif @mixin diikuti dengan nama mixin dan deklarasi CSS yang ingin disimpan.
+1a. Contoh : @mixin border-radius($radius) {
+  border-radius: $radius;
+}
+--------------------------------------------------------
+
+
+
+C. Cara menggunakan Mixins :
+1. Untuk menggunakan mixin yang telah didefinisikan, gunakan direktif @include diikuti dengan nama mixin dan argumen (jika diperlukan).
+1a. Contoh Penggunaan Mixin :
+.button {
+  @include border-radius(5px);
+  background-color: #003366;
+  color: #fff;
+}
+--------------------------------------------------------
+
+
+
+D. Fitur-fitur Mixins :
+1. Parameter : Mixins dapat menerima parameter yang memungkinkan fleksibilitas dalam mendefinisikan gaya. Parameter ini dapat memiliki nilai default.
+1a. Contoh :
+@mixin box-shadow($h-offset: 0, $v-offset: 0, $blur: 5px, $color: rgba(0,0,0,0.3)) {
+  box-shadow: $h-offset $v-offset $blur $color;
+}
+
+.card {
+  @include box-shadow(2px, 2px, 10px, rgba(0,0,0,0.2));
+}
+--------------------------------------------------------
+2. nesting : 
+2a. Mixins dapat mencakup aturan bersarang, mirip dengan cara kamu menulis CSS bersarang di dalam SCSS.
+Contoh : 
+@mixin button-style {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+}
+
+.btn-primary {
+  @include button-style;
+}
+--------------------------------------------------------
+3. Mixin dengan komponen :
+3a. Mixins juga dapat mencakup komponen CSS yang lebih kompleks dan menerapkannya di berbagai tempat.
+3b. contoh : 
+@mixin card($bg-color: #fff, $border-color: #ddd) {
+  background-color: $bg-color;
+  border: 1px solid $border-color;
+  border-radius: 5px;
+  padding: 15px;
+}
+
+.card-primary {
+  @include card(#f8f9fa, #e2e3e5);
+}
+
+.card-secondary {
+  @include card(#e9ecef, #ced4da);
+}
+--------------------------------------------------------
+--------------------------------------------------------
+
+
+
+E. Keuntungan menggunakan Mixins :
+1. Keterbacaan dan Pemeliharaan:
+Mixins membantu membuat kode CSS lebih bersih dan terorganisir, serta memudahkan pemeliharaan dan pembaruan.
+--------------------------------------------------------
+2. Reusabilitas:
+Kamu bisa menggunakan mixins di berbagai tempat, menghindari penulisan kode yang sama berulang kali.
+--------------------------------------------------------
+3. Fleksibilitas:
+Dengan parameter, mixins menawarkan fleksibilitas dalam penerapan gaya yang berbeda dengan satu definisi.
+--------------------------------------------------------
+4. Pengurangan Duplikasi:
+Mixins mengurangi duplikasi kode dengan memungkinkan kamu untuk mendefinisikan gaya yang dapat digunakan di banyak elemen.
+--------------------------------------------------------
+
+
+
+F. Perbedaan dengan `Placeholder Selectors` & Mixins :
+1. Mixins : Menghasilkan aturan CSS dan dapat digunakan dengan parameter. Mixins dapat diterapkan langsung ke elemen dengan `@include`.
+--------------------------------------------------------
+2. Placesholder Selectors ('%') : Digunakan untuk mendefinisikan gaya yang tidak secara langsung menghasilkan output CSS tetapi dapat di-extend ke selector lain dengan `@extend`. Ini lebih efisien dalam menghasilkan kode CSS yang lebih kecil jika banyak selector berbagi gaya yang sama.
+--------------------------------------------------------
+3. Contoh : 
+%base-button {
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.btn-primary {
+  @extend %base-button;
+  background-color: #007bff;
+  color: #fff;
+}
+--------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
