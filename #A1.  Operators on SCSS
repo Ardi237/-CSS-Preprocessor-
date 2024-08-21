@@ -1,0 +1,139 @@
+A. Umum :
+1. Operators dalam SCSS adalah alat yang memungkinkan kamu untuk melakukan operasi matematika, manipulasi warna, dan operasi string secara langsung di dalam stylesheet.
+-------------------------------------------------------------------------
+2. SCSS mendukung berbagai jenis operator, termasuk operator aritmatika, perbandingan, dan logika. Fitur ini membuat SCSS sangat fleksibel dalam pengaturan nilai dan pengelolaan gaya yang dinamis.
+-------------------------------------------------------------------------
+
+
+B. Jenis-jenis operator di SCSS : 
+1. Operator Aritmatika :
+*  Addition (+): Menambahkan dua nilai.
+*  Subtraction (-): Mengurangi satu nilai dari nilai lainnya.
+*  Multiplication (*): Mengalikan dua nilai.
+*  Division (/): Membagi satu nilai dengan nilai lainnya. (SCSS mendukung pembagian khusus di *  mana / bisa digunakan tanpa dianggap sebagai operator CSS.)
+*  Modulus (%): Menghasilkan sisa dari pembagian dua nilai.
+Contoh :
+$width: 100px;
+$padding: 20px;
+
+.container {
+  width: $width + $padding; // Hasilnya 120px
+}
+-------------------------------------------------------------------------
+2. Operator Perbandingan
+* Equal (==): Memeriksa apakah dua nilai sama.
+* Not Equal (!=): Memeriksa apakah dua nilai tidak sama.
+* Greater Than (>): Memeriksa apakah nilai pertama lebih besar dari nilai kedua.
+* Less Than (<): Memeriksa apakah nilai pertama lebih kecil dari nilai kedua.
+* Greater Than or Equal (>=): Memeriksa apakah nilai pertama lebih besar atau sama dengan * nilai kedua.
+* Less Than or Equal (<=): Memeriksa apakah nilai pertama lebih kecil atau sama dengan nilai kedua.
+Contoh : 
+$font-size: 16px;
+
+.text {
+  @if $font-size > 12px {
+    font-weight: bold;
+  }
+}
+-------------------------------------------------------------------------
+3. Operator Logika
+* And (and): Menghasilkan true jika kedua pernyataan benar.
+* Or (or): Menghasilkan true jika salah satu pernyataan benar.
+* Not (not): Membalikkan nilai boolean.
+Contoh:
+$is-light: true;
+$is-rounded: false;
+
+.box {
+  @if $is-light and not $is-rounded {
+    background-color: #f0f0f0;
+  }
+}
+-------------------------------------------------------------------------
+4. Operator Warna :
+* SCSS juga mendukung operasi pada warna seperti penambahan atau pengurangan nilai warna.
+Contoh:
+$base-color: #333;
+
+.button {
+  background-color: $base-color + #222; // Menghasilkan #555555
+}
+-------------------------------------------------------------------------
+5. Operator String
+* String Concatenation (+): Menggabungkan dua string.
+* String Interpolation (#{}): Menggabungkan variabel atau nilai dinamis dengan string.
+Contoh:
+$font-type: "Helvetica";
+
+.text {
+  font-family: $font-type + ", Arial, sans-serif"; // Menghasilkan "Helvetica, Arial, sans-serif"
+}
+
+$size: "large";
+
+.box-#{$size} {
+  width: 100px; // Hasilnya .box-large { width: 100px; }
+}
+------------------------------------------------------------------------
+
+
+
+C. Mengapa Menggunakan Operators di SCSS?
+1. Fleksibilitas:
+Kamu bisa membuat perhitungan langsung di dalam stylesheet, seperti menghitung ukuran padding atau margin berdasarkan nilai lain. Ini sangat berguna dalam responsive design atau layout yang dinamis.
+------------------------------------------------------------------------
+2. Dinamisme:
+Dengan operator, kamu bisa menyesuaikan nilai berdasarkan kondisi tertentu, memungkinkan pembuatan gaya yang lebih dinamis dan interaktif.
+------------------------------------------------------------------------
+3. Efisiensi:
+Mengurangi duplikasi dan meningkatkan efisiensi kode dengan mengelola nilai secara programatis. Misalnya, kamu dapat membuat variasi warna dengan mudah menggunakan operator warna tanpa mendefinisikan setiap warna secara manual.
+------------------------------------------------------------------------
+4. Penggunaan yang Mudah:
+Operator SCSS sangat mudah digunakan dan dipahami, bahkan bagi mereka yang baru mengenal preprocessor CSS.
+------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
