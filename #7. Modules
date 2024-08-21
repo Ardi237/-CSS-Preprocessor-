@@ -1,0 +1,213 @@
+A. Modules :
+1. Kamu tidak perlu menulis semua Sass dalam satu berkas. Kita dapat membaginya seusai keinginan dengan `@us` aturan ini. 
+----------------------------------------------------------
+2. Aturan ini memuat berkas Sass lain sebagai modul, yang berarti anda dapat  merujuk berkas Sass lain sebagai modul, yang berarti kita dapat merujuk ke variabel, mixin, dan fungsi dalam berkas Sass  kamu dengan namespace berdasarkan nama berkas. 
+----------------------------------------------------------
+3. Menggunakan berkas juga akan menyertakan CSSS yang dihasilkannya dalam keluaran terkompilasi anda.
+----------------------------------------------------------
+
+
+
+B. Contoh dasar :
+--------------------------------------
+1. //_base.sass :
+   $font-stack : Helvetica, sans-serif.
+   $primary-color : #333;
+body {
+  font : 100% $font-stack
+  color : $primary-color
+}
+---------------------------------------
+2. // styles.sass
+@use `base` 
+
+.inverse {
+  background-color : base.$primary-color;
+  color : white;
+}
+--------------------------------------
+3. CSS
+body {
+  font : 100% Helvetica, sans-serif;
+  color : #333;
+}
+
+.inverse {
+  background-color :#333;
+  color: white;
+}
+--------------------------------------
+
+
+
+C. Umum :
+1. Modules di Sass adalah fitur yang diperkenalkan untuk mengatasi beberapa keterbatasam dan tantangan yang ada pada sistem `@import` yang lebih lama. 
+----------------------------------------------------------
+2. Fitur ini menggunakan `@use` dan `@forward` untuk mengatur cara file Sass berinteraksi satu sama lain, membuat kode lebih moduler, terorganisir, dan mencegah konflik.
+----------------------------------------------------------
+
+
+
+D. Konsep Dasar Module di Sass :
+1. `@use` : 
+* Digunakan untuk mengimpor file Sass ke dalam file lain.
+* Mengimpor file dengan `@use` menghindari pencemaran ruang lingkup global karena    setiap file yang diimpor menjadi scoped secara otomatis.
+* Menyediakan cara yang lebih jelas untuk mengakses variabel, mixins, dan fungsi      dari file yang diimpor dengan menggunakan namespace.
+----------------------------------------------------------
+2. `@forward` :
+* Digunakan untuk meneruskan kontent dari file Sass lain ke file yang mengimpornya.
+* Memudahkan pembuatan library atau modul yang dapat diteruskan ke modul lain.
+----------------------------------------------------------
+
+
+C. Keuntungan menggunakan modules :
+1. Namespace dan Encapsulation : `@use` secara otomatis memberi namespace pada variabel, mixins, dan fungsi yang diimpor, menghindari konflik dan pencemaran ruang lingkup global.
+2. Modularitas : Membantu dalam membagi kode menjadi modul-modul kecil yang terpisah dan lebih mudah dikelola.
+3. Menghindari Redundansi : Menghindari masalah pengimporan berulang dan duplikasi kode.
+4. Keterbacaan dan pemeliharaan : Memudahkan pengorganisasian dan pemeliharaan kode dengan memisahkan 'concern' dan tanggung jawab.
+
+
+D. Cara menggunakan `@use` dan `@forward`
+1. Contoh Penggunaan `@use` :
+* `_variables.scss` : 
+  $primary-color : #003366;
+  $font-stack : `Helvetica`, sans-serif;
+----------------------------------------------------------
+* `_mixins.scss` :
+  @mixin border-radius ($radius) {
+    border-radius : $radius;
+  }
+----------------------------------------------------------
+* `_base.scss` :
+  @use 'variables';
+  body {
+    font-family: variables.$font-stack;
+    color: variables.$primary-color;
+  }
+----------------------------------------------------------
+* `main.scss`;
+  @use `base`;
+----------------------------------------------------------
+//penjelasan :
+1. Dalam contoh ini :
+* `@use 'variables'` di `_base.scss` memberi namespace `variabels` untuk variabel dari `_variables.scss`.
+* File `main.scss` menggunakan `@use 'base'` untuk mengimpor dan menerapkan gaya dari `_base.scss`.
+----------------------------------------------------------
+----------------------------------------------------------
+2. Contoh Penggunaan `@forward` :
+* `_index.scss` (sebagai file index yang mengumpulkan semua modul):
+  @forward 'variables';
+  @forward 'mixins';
+* `main.scss` : 
+  @use 'index' as *;
+  
+  body {
+    color: $primary-color;
+    @include border-radius(5px);
+  }
+----------------------------------------------------------
+//Penjelasan :
+* @forward 'variables'; dan @forward 'mixins'; di _index.scss membuat variabel dan mixins tersedia untuk file yang mengimpor _index.scss.
+*  main.scss menggunakan @use 'index' as *; untuk mengakses semua variabel dan mixins yang diteruskan oleh _index.scss tanpa namespace tambahan.
+----------------------------------------------------------
+
+
+
+E. Perbedaan dengan `@import` :
+1. Namespace : `@use` memberi namespace secara otomatis, sementara `@import` tidak.
+----------------------------------------------------------
+2. Pengulangan : Dengan @import, file yang sama bisa diimpor lebih dari sekali, yang dapat menyebabkan duplikasi. Dengan @use, file hanya diimpor sekali dan secara otomatis menghindari duplikasi.
+----------------------------------------------------------
+3. Global vs Scoped : @import mengubah variabel dan mixins ke dalam ruang lingkup global, sementara @use menjaga mereka terpisah dalam namespace mereka sendiri.
+----------------------------------------------------------
+
+
+
+F. Perbedaan antara `@use` dan `@forward` :
+1. `@use` :
+1a. Tujuan : `@use` digunakan untuk mengimpor konten dari satu file Sass ke dalam file Sass lain dengan namespace. Ini memungkinkan kamu menggunakan variabel, mixins, dan fungsi dari file yang diimpor.
+----------------------------------------------------------
+1b. Namespace : keika menggunakan `@use`, variabel, mixins, dan fungsi dari file yang diimpor otomatis diberi namespace, yang mencegah konflik nama dengan konten file lain.
+----------------------------------------------------------
+1c. Penggunaan : Dengan @use, kamu dapat mengakses variabel, mixins, dan fungsi dengan menambahkan namespace yang ditentukan.
+----------------------------------------------------------
+1d. Pengimporan Ganda : File yang diimpor dengan `@use` hanya akan dimuat sekali, meskipun diimpor di beberapa file lain. Ini membantu mencegah masalah duplikasi.
+----------------------------------------------------------
+1e. Contoh : 
+* `variables.scss` :  $primary-color : #003366;
+* `styles.scss` : @use `variables`;
+                  body {
+                    color : variables.$primary-color;
+                  }
+----------------------------------------------------------
+//penjelasan : Dalam contoh ini, variables.scss diimpor ke dalam styles.scss dengan namespace variables, dan variabel $primary-color diakses menggunakan variables.$primary-color.
+----------------------------------------------------------
+----------------------------------------------------------
+2. `@forward` : 
+2a. Tujuan : `@forward` : meneruskan (forward) konten dari satu file Sass ke file lain. Ini memungkinkan file yang meneruskan konten untuk menyebarkannya keapda file lain yang mengimpor file tersebut.
+----------------------------------------------------------
+2b. Namespace : `@forward` tidak menambah namespace, melainkan meneruskan konten seperti adanya ke file yang mengimpornya. Ini membantu membuat file index yang menyatukan beberapa partials.
+----------------------------------------------------------
+2c. Penggunaan : `@forward` sering digunakan dalam file index untuk mengumpulkan dan meneruskan berbagai partials ke file yang mengimpornya. Ini berguna untuk membangun library atua modul dengan struktur yang jelas.
+----------------------------------------------------------
+2d. Pengimporan ganda : File yang meneruskan dengan `@forward` juga hanya akan dimulai sekali ketika file yang mengimpornya memuatnya, mencegah duplikasi.
+----------------------------------------------------------
+2e. Contoh : 
+* `index.scss`  :  @forward `variables`;
+                   @forward `mixins`;
+* `main.scss` : @use `index` as *;
+                body {
+                    color : $primary-color;
+                    @include border-radius(5px);
+                }
+----------------------------------------------------------
+// penjelasan : `index.scss` meneruskan konten dari `variables.scss` dan `mixins.scss`. File 'main.scss' kemudian menggunakan `@use 'index' as *` untuk mengakses semua konten yang diteruskan dari `index.scss`. 
+----------------------------------------------------------
+----------------------------------------------------------
+
+
+
+G. perbedaan utama : 
+1. Tujuan :
+* @use digunakan untuk mengimpor dan memberi namespace pada konten dari file lain.
+* @forward digunakan untuk meneruskan konten dari satu file ke file lain yang     
+  mengimpornya.
+----------------------------------------------------------
+2. Namespace :
+* @use menambah namespace pada konten yang diimpor.
+* @forward meneruskan konten tanpa menambah namespace.
+----------------------------------------------------------
+3. Pengimporan :
+* `@use` mengakses file yang diimpor dan kontennya dengan namespace. 
+* `@forward` digunakan untuk membangun file index atau modul yang mengumpulkan 
+  dan meneruskan konten dari beberapa file ke file lain yang mengimpor file yang 
+  meneruskan konten. 
+----------------------------------------------------------
+4. Penggunaan Umum :
+* `@use` digunakan ketika kamu ingin mengimpor konten dengan namespace dan menggunakannya langsung.
+* `@forward` digunakan untuk membangun file index atau modul yang mengumpulkan       dan meneruskan konten dari beberapa file ke file yang mengimpor file index        atau modul tersebut.
+----------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
