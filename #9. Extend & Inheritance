@@ -1,0 +1,93 @@
+A. Umum : 
+1. Extend/Inheritance dalam SCSS adalah fitur yang memungkinkan kamu untuk berbagi aturan CSS antara beberapa selector tanpa menulis ulang kode yang sama berulang kali. 
+---------------------------------------------------------------------------------
+2. Fitur ini menggunakan direktif @extend dan placeholder selectors (%) untuk mendefinisikan dan menerapkan gaya yang sama di beberapa tempat dalam stylesheet.
+---------------------------------------------------------------------------------
+
+
+B. Pengertian Extend/Inheritance :
+1. `@extend` : direktif SCSS yang digunakan untuk membuat satu selector mewarisi gaya dari selector lainnya.
+1a. Dengan menggunakan `extend`, kamu dapat menghindari duplikasi kode CSS dan membuat stylesheet lebih bersih dan terorganisir.
+---------------------------------------------------------------------------------
+2. Placeholder Selectors (%):
+2a. Placeholder selectors : selector yang tidak menghasilkan output CSS langsung tetapi dirancang untuk di-extend oleh selector lain.
+2b. Placeholder selectors diawali dengan tanda persen (%) dan umumnya digunakan bersama dengan @extend.
+---------------------------------------------------------------------------------
+
+
+
+C. Cara menggunakan `@extend` dan placeholde selectors
+1. Contoh dasar menggunakan `@extend` :
+1a. Definisi selektor : 
+.button {
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+}
+1b. Menggunakan `@extend` :
+.btn-primary {
+  @extend .button;
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn-secondary {
+  @extend .button;
+  background-color: #6c757d;
+  color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
