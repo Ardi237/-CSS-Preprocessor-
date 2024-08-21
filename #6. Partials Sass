@@ -1,0 +1,114 @@
+A. Partials :
+1. Partials dalam Sass : file yang digunakan untuk memecah kode CSS menjadi beberapa bagian yang lebih kecil dan lebih terorganisir.
+--------------------------------------------------
+2. Partials memungkinkan kamu untuk menulis dan mengelola CSS dengan lebih efisien, terutama pada proyek besar.
+--------------------------------------------------
+
+
+B. Apa itu Partials :
+1. Partials : File Sass yang namanya diawali dengan tanda garis bawah (`_`). 
+--------------------------------------------------
+2. Mereka tidak menghasilkan file CSS terpisah ketika dikompilasi. Sebagai gantinya, partials diimpor ke dalam file Sass menggunakan `@import` (sebelum Sass versi 1.0) atau `@use` dan `@forward`.
+--------------------------------------------------
+
+
+C. Fungsi dan keuntungan Partials :
+1. Modularitas : Dengan menggunakan partials, kamu dapat memecah stylesheet menjadi bagian-bagian yang lebih kecil dan terpisah. 
+1a. Misalnya kamu bisa memiliki partials untuk variabel, mixins, reset CSS, atau bagian-bagian khusus dari layout dan komponen.
+--------------------------------------------------
+2. Pengorganisasian : Partials membantu dalam mengorganisir kode CSS dengan lebih baik, sehingga lebih mudah untuk dikelola dan dipelihara. Ini sangar berguna untuk proyek besar di mana banyak orang mungkin bekerja pada Stylesheet yang sama.
+--------------------------------------------------
+3. Pengurangan Duplikasi : Partials memungkinkan kamu untuk menyimpan kode yang sering digunakan (seperti variabel, mixins, atau reset CSS) dalam satu tempat, sehingga mengurangi duplikasi kode di berbagai file.
+--------------------------------------------------
+
+
+D. Cara menggunakan Partials :
+1. Membuat Partail: Buat file partial dengan nama diawali garis bawah.
+* `_variable.scss` : Untuk menyimpan variabel.
+* `_mixin.scss` : Untuk menyimpan mixins.
+* `_base.scss` : Untuk aturan dasar seperti reset CSS atau styling umum.
+*  `_component.scss` : Untuk styling komponen spesifik.
+--------------------------------------------------
+2. Mengimpor Partial : FUnakan `@import` atau `@use` dan `@forward` di file utama (misalnya `main.scss`).
+--------------------------------------------------
+
+
+
+E. Contoh Penggunaan :
+1. Contoh :
+/* _variables.scss */
+$primary-color: #003366;
+$font-stack: 'Helvetica', sans-serif;
+
+/* _mixins.scss */
+@mixin border-radius($radius) {
+  border-radius: $radius;
+}
+
+/* _base.scss */
+body {
+  font-family: $font-stack;
+  color: $primary-color;
+}
+
+/* _components.scss */
+.button {
+  background-color: $primary-color;
+  @include border-radius(5px);
+}
+
+/* main.scss */
+@import 'variables';
+@import 'mixins';
+@import 'base';
+@import 'components';
+--------------------------------------------------
+//Pada contoh di atas :
+1. _variables.scss berisi variabel yang dapat digunakan di seluruh stylesheet.
+--------------------------------------------------
+2. _mixins.scss berisi mixins yang dapat dipanggil di berbagai tempat.
+--------------------------------------------------
+3. _base.scss berisi aturan dasar untuk body.
+--------------------------------------------------
+4. _components.scss berisi styling spesifik untuk komponen seperti .button.
+--------------------------------------------------
+5. main.scss mengimpor semua partials yang dibutuhkan untuk membentuk file CSS akhir.
+--------------------------------------------------
+
+
+F.Transisi ke `@use` dan `@forward` :
+1. Sass versi terbaru merekomendasikan penggunaan @use dan @forward sebagai pengganti @import untuk meningkatkan modularitas dan menghindari masalah global namespace.
+--------------------------------------------------
+2. Contoh dengan `@use` dan `@forward` :
+/* _variables.scss */
+$primary-color: #003366;
+$font-stack: 'Helvetica', sans-serif;
+
+/* _mixins.scss */
+@mixin border-radius($radius) {
+  border-radius: $radius;
+}
+
+/* _base.scss */
+@use 'variables';
+@use 'mixins';
+
+body {
+  font-family: variables.$font-stack;
+  color: variables.$primary-color;
+}
+
+/* _components.scss */
+@use 'variables';
+@use 'mixins';
+
+.button {
+  background-color: variables.$primary-color;
+  @include mixins.border-radius(5px);
+}
+
+/* main.scss */
+@use 'base';
+@use 'components';
+--------------------------------------------------
+//penjelasan : Dengan menggunakan partials, kamu dapat membuat stylesheet yang lebih terstruktur dan mudah dikelola, sehingga meningkatkan produktivitas dan kualitas kode dalam proyek CSS.
