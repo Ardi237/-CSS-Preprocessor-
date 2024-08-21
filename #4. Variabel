@@ -1,0 +1,66 @@
+A. Variabel :
+1. Anggap Variabel sebagia cara untuk menyimpan informasi yang ingin kita gunakan kembali di seluruh stylesheet kita.
+----------------------------------------------------
+2.Kita dapat menyimpan hal-hal seperti warna, tumpukan font, atau nilai CSS apa pun yang menurut kita ingin digunakan kembali. 
+----------------------------------------------------
+3. Sass menggunakan { $ } untuk menjadikan sesuatu sebagai variabel.
+----------------------------------------------------
+
+
+B. Contoh :
+1. Sass :
+$font-stack : Helvetica, sans-serif
+$primary-color : #333
+
+body {
+  font : 100% $font-stack
+  color : $primary-color
+}
+----------------------------------------------------
+2. CSS : 
+body {
+  font : 100% Helvetica, sans-serif;
+  color : #333;
+}
+----------------------------------------------------
+//Penjelasan :
+1. Saat `Sass` diproses, ia mengambil variabel yang kita definisikan untuk $font-stack dan $primary-color  dan menghasilkan CSS ditempatkan di CSS. 
+2. Ini bisa sangat ampuh saat bekerja dengan warna dan menjaganya tetap konsisten di seluruh situs.
+
+
+C. Keuntungan menggunakan variabel di Sass :
+1. Kemudahan pemeliharan : mengubah satu variabel akan mengupdate semua referensi dari variabel tersebut di seluruh file, membuat stylesheet lebih mudah dipelihara.
+----------------------------------------------------
+2. Konsistensi : Menggunakna variabel memastikan nilai yang sama digunakan secara konsisten di seluruh proyek.
+----------------------------------------------------
+3. Refactoring yang mudah : Kamu bisa dnegna mudah mengubah tema atau tampilan website hanya dengan mengubah nilai variabel.
+----------------------------------------------------
+4. Organisasi yang lebih baik : Menyimpan nilai berulang seperti warna, font-size, dan margin dalam variabel dapat mengorganisir kode dengan lebih baik.
+----------------------------------------------------
+
+
+D. Tipe nilai yang bisa disimpan dalam variabel : 
+1. Sass memungkinkan kamu untuk menyimpan berbagia jenis nilai dalam variabel, termasuk :
+* Warna  : `#ff00000`, `rgb(255, 0, 0)`, dll.
+* Angka  : `16px`, `1.5em`, `100%`, dll.
+* String : `'Helvetica'`, `'bold'`, dll.
+* Booleans : `true`, `false`.
+* List : `1px solid black`, `10px 20px 30px`, dll.
+* Maps (seperti objek) : `("primary" : #003366, "secondary": #FFD700)`
+----------------------------------------------------
+
+
+
+E. Scope dari variabel :
+1. Sass juga mendukung scoping variabel, artinya variabel yang didefinisikan dalam blok tertentu (misalnya di dalam fungsi atau mixin) hanya dapat diakses di dalam blok tersebut. 
+2. Variabel global dapat diakses di mana saja.
+
+
+
+
+
+
+
+
+
+
