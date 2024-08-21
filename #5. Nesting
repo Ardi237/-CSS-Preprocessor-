@@ -1,0 +1,122 @@
+A. Nesting :
+1. Sass memungkinkan kita untuk menyusun pemilih CSS dengan cara yang mengikuti hierarki visual HTML.
+---------------------------------------------
+2. Ketahuilah bahwa aturan yang terlalu bertumpuk akan menghasilkan CSS yang terlalu berkualifikasi yang dapat terbukti sulit dipertahankan dan umumnya dianggap sebagai praktik yang buruk.
+---------------------------------------------
+3. Contoh dasar :
+* Sass :
+nav {
+  ul {
+    margin : 0;
+    padding : 0;
+    list-style : none;
+  }
+  li {
+    display : inline-block;  
+  }
+  a {
+    display : block;
+    padding : 6px 12px;
+    text-decoration : none;
+  }
+}
+---------------------------------------------
+* CSS :
+nav ul {
+  margin : 0;
+  padding : 0;
+  list-style : none;
+}
+
+nav li {
+  display : inline-block;
+}
+
+nav a {
+  display : block;
+  padding : 6px 12px;
+  text-decoration : none;
+}
+---------------------------------------------
+//penjelasan :
+1. Kita melihat bahwa selector ul, li dan a bersarang di dalam nav selector. Ini adalah cara yang bagus untuk mengatur CSS anda dan membuatnya lebih mudah dibaca.
+---------------------------------------------
+
+
+B. Keuntungan Nesting :
+1. Meningkatkan keterbacaan : Dengan nesting, kamu bisa menulis CSS dengan struktur yang lebih mirip dengan struktur HTML, yang memudahkan pemahaman dan navigasi dalam kode.
+---------------------------------------------
+2. Mengurangi Redundansi : Menghindari penulisan selector panjang yang berulang, sehingga kode menjadi lebih bersih.
+---------------------------------------------
+3. Mendukung pengelompokan : Memudahkan pengelompokan aturan yang terkait secara logis dalam satu tempat.
+---------------------------------------------
+
+
+C. Peringatan :
+1. Walaupun nesting menawarkan keuntungan dalma hal keterbacaan dan organisasi, penting untuk tidak terlalu dalam melakukan nesting. 
+---------------------------------------------
+2. Terlalu dalam nesting dapat menghasilkan selector yang sangat spesifik dan membuat CSS menjadi sulit dikelola. 
+---------------------------------------------
+3. Biasanya, disarankan untuk tidak melakukan nesting lebih dari 3 level.
+---------------------------------------------
+
+
+D. Contoh penggunaan lebih lanjut :
+  /* Struktur HTML */
+<div class="card">
+  <h2 class="title">Card Title</h2>
+  <p class="content">Some content here</p>
+  <a href="#" class="link">Read More</a>
+</div>
+
+/* Nesting di Sass */
+.card {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 5px;
+
+  .title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+
+  .content {
+    font-size: 1em;
+    color: #666;
+  }
+
+  .link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+---------------------------------------------
+Pada Contoh di atas : 
+1. card adalah elemen utama.
+---------------------------------------------
+2. .title, .content, dan .link adalah elemen yang berada di dalam .card.
+---------------------------------------------
+3. &:hover adalah contoh dari pseudo-class yang bisa digunakan dalam nesting.
+---------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
